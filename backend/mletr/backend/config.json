@@ -1,0 +1,47 @@
+{
+  "network": "sepolia",
+  "forms": [
+    {
+      "name": "TradeTrust Bill of Lading v2 (Carrier)",
+      "type": "TRANSFERABLE_RECORD",
+      "defaults": {
+        "$template": {
+          "type": "EMBEDDED_RENDERER",
+          "name": "BILL_OF_LADING_CARRIER",
+          "url": "https://generic-templates.tradetrust.io"
+        },
+        "issuers": [
+          {
+            "name": "DEMO TOKEN REGISTRY",
+            "tokenRegistry": "0x142Ca30e3b78A840a82192529cA047ED759a6F7e",
+            "identityProof": {
+              "type": "DNS-TXT",
+              "location": "example.tradetrust.io"
+            },
+            "revocation": {
+              "type": "NONE"
+            }
+          }
+        ]
+      },
+      "schema": {
+        "type": "object",
+        "required": ["blNumber", "scac"],
+        "properties": {
+          "blNumber": {
+            "type": "string",
+            "title": "BL Number"
+          },
+          "scac": {
+            "type": "string",
+            "title": "Standard Carrier Alpha Code (SCAC)"
+          }
+        }
+      },
+      "data": {
+        "blNumber": "BL12345",
+        "scac": "SCAC123"
+      }
+    }
+  ]
+}

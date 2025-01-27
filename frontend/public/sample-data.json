@@ -1,0 +1,28 @@
+{
+  "data": {
+    "blNumber": "",
+    "scac": "",
+    "carrierName": "",
+    "logo": "",
+    "shipper": { "name": "", "address": { "street": "", "country": "" } },
+    "onwardInlandRouting": "",
+    "consignee": { "toOrderOfText": "", "name": "" },
+    "notifyParty": { "name": "" },
+    "vessel": "",
+    "voyageNo": "",
+    "portOfLoading": "",
+    "portOfDischarge": "",
+    "placeOfReceipt": "",
+    "placeOfDelivery": "",
+    "packages": [],
+    "carrierReceipt": "",
+    "placeOfIssueBL": "",
+    "numberOfOriginalBL": "",
+    "dateOfIssueBL": "",
+    "shippedOnBoardDate": "",
+    "signForTermsAndCondition": "",
+    "signedForCarrierText": "",
+    "carrierSignature": "",
+    "termsOfCarriage": ""
+  }
+}

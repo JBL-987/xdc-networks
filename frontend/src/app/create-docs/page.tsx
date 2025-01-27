@@ -68,7 +68,7 @@ const CreateDocsPage = () => {
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage>Create Document</BreadcrumbPage>
+                <BreadcrumbPage>Upload Docuemnt</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -103,8 +103,10 @@ const CreateDocsPage = () => {
                     accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png"
                     onChange={handleFileChange}
                   />
-                  <div className="m-8 space-y-10">
-                    <p className="text-xs">don't have config file?</p>
+                </div>
+              </CardContent>
+                  <div className="mb-8 space-y-5 ">
+                    <p className="text-xs text-center">don't have config file?</p>
                     <div className="flex space-x-4 mx-auto text-center justify-center">
                       <Link href="https://docs.tradetrust.io/docs/reference/document-creator/config-file/">
                         <Button variant="outline" size="sm">
@@ -113,15 +115,13 @@ const CreateDocsPage = () => {
                           </span>
                         </Button>
                       </Link>
-                      <Link href="#">
-                        <Button variant="secondary" size="sm">
+                      <Link href="/create-docs/form-selection">
+                        <Button variant="default" size="sm">
                           <span className="text-xs">Load Demo Config</span>
                         </Button>
                       </Link>
                     </div>
                   </div>
-                </div>
-              </CardContent>
             </Card>
             <div className="lg:flex hidden w-full">
               <Image

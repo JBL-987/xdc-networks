@@ -49,6 +49,7 @@ contract TradeDocumentManager {
     
     struct Document {
         string documentID;
+        bytes32 documentHash;
         string documentName;
         DocumentType docType;
         DocumentCategory category;
@@ -64,6 +65,8 @@ contract TradeDocumentManager {
     mapping(DocumentCategory => DocumentType) public categoryTypes;
     mapping(DocumentCategory => address[]) public authorizedVerifiers;
     mapping(address => bool) public isAuthorizedIssuer;
+
+    address public owner;
     
     event DocumentIssued(string documentID, DocumentCategory category, address issuer, address holder);
     event DocumentTransferred(string documentID, address from, address to);
@@ -71,8 +74,14 @@ contract TradeDocumentManager {
     event VerifierAuthorized(DocumentCategory category, address verifier);
     event IssuerAuthorized(address issuer);
     event DocumentInvalidated(string documentID);
+
+    modifier onlyOwner(){
+        require(msg.sender == owner, "Not Authorized");
+        _;
+    }
     
     constructor() {
+        owner = msg.sender;
         // Initialize document types for each category
         // Commercial Documents - typically transferable
         categoryTypes[DocumentCategory.PO] = DocumentType.Transferable;
@@ -118,6 +127,9 @@ contract TradeDocumentManager {
         categoryTypes[DocumentCategory.PC] = DocumentType.Verifiable;
         categoryTypes[DocumentCategory.BoE] = DocumentType.Transferable;
         categoryTypes[DocumentCategory.PN] = DocumentType.Transferable;
+
+        isAuthorizedIssuer[0xF281671001ec256F3682031003774bfD4CB28227] = true; 
+
     }
     
     modifier onlyAuthorizedIssuer() {
@@ -125,7 +137,7 @@ contract TradeDocumentManager {
         _;
     }
     
-    function authorizeIssuer(address _issuer) public {
+    function authorizeIssuer(address _issuer) public onlyOwner {
         require(_issuer != address(0), "Invalid issuer address");
         isAuthorizedIssuer[_issuer] = true;
         emit IssuerAuthorized(_issuer);
@@ -141,10 +153,14 @@ contract TradeDocumentManager {
         string memory _documentID,
         string memory _documentName,
         DocumentCategory _category,
-        address _holder
+        address _holder,
+        bytes32 _documentHash
     ) public onlyAuthorizedIssuer {
         require(documents[_documentID].issuer == address(0), "Document already exists");
         require(_holder != address(0), "Invalid holder address");
+        require(isAuthorizedIssuer[msg.sender], "Not authorized to issue documents");
+
+
         
         Document storage newDoc = documents[_documentID];
         newDoc.documentID = _documentID;
@@ -153,9 +169,11 @@ contract TradeDocumentManager {
         newDoc.category = _category;
         newDoc.issuer = msg.sender;
         newDoc.holder = _holder;
+        newDoc.documentHash = _documentHash;
         newDoc.isVerified = false;
         newDoc.issueDate = block.timestamp;
         newDoc.isActive = true;
+        
         
         emit DocumentIssued(_documentID, _category, msg.sender, _holder);
     }
@@ -188,15 +206,42 @@ contract TradeDocumentManager {
         );
         
         bool isAuthorizedVerifier = false;
+
+        if (msg.sender == owner || msg.sender == doc.issuer){
+            isAuthorizedVerifier = true;
+        }
+        else{
+            address[] storage verifiers = authorizedVerifiers[doc.category];
+            for (uint i = 0; i < verifiers.length; i++) {
+                if (verifiers[i] == msg.sender) {
+                    isAuthorizedVerifier = true;
+                    break;
+                }
+            }
+        }
+        require(isAuthorizedVerifier, "Not authorized to verify this document type");
+        
+        doc.isVerified = true;
+        doc.verifiers.push(msg.sender);
+        emit DocumentVerified(_documentID, msg.sender);
+    }
+
+    function verifyDocumentHash (string memory _documentID, bytes32 _submittedHash) public{
+        Document storage doc = documents[_documentID];
+        require(doc.issuer != address(0), "Document is invalid");
+        require(doc.isActive, "Document does not exist");
+        require(doc.docType == DocumentType.Verifiable || doc.docType == DocumentType.Both, "Document is not verifiable");
+        require( doc.documentHash == _submittedHash, "document hash mismatch!");
+
+        bool isAuthorizedVerifier = false;
         address[] storage verifiers = authorizedVerifiers[doc.category];
-        for (uint i = 0; i < verifiers.length; i++) {
-            if (verifiers[i] == msg.sender) {
+        for (uint i = 0; i<verifiers.length; i++){
+            if(verifiers[i] == msg.sender){
                 isAuthorizedVerifier = true;
                 break;
             }
         }
         require(isAuthorizedVerifier, "Not authorized to verify this document type");
-        
         doc.isVerified = true;
         doc.verifiers.push(msg.sender);
         emit DocumentVerified(_documentID, msg.sender);

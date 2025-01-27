@@ -1,0 +1,484 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_issuer",
+				"type": "address"
+			}
+		],
+		"name": "authorizeIssuer",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "enum TradeDocumentManager.DocumentCategory",
+				"name": "_category",
+				"type": "uint8"
+			},
+			{
+				"internalType": "address",
+				"name": "_verifier",
+				"type": "address"
+			}
+		],
+		"name": "authorizeVerifier",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "documentID",
+				"type": "string"
+			}
+		],
+		"name": "DocumentInvalidated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "documentID",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "enum TradeDocumentManager.DocumentCategory",
+				"name": "category",
+				"type": "uint8"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "issuer",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "holder",
+				"type": "address"
+			}
+		],
+		"name": "DocumentIssued",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "documentID",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			}
+		],
+		"name": "DocumentTransferred",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "documentID",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "verifier",
+				"type": "address"
+			}
+		],
+		"name": "DocumentVerified",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_documentID",
+				"type": "string"
+			}
+		],
+		"name": "invalidateDocument",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_documentID",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_documentName",
+				"type": "string"
+			},
+			{
+				"internalType": "enum TradeDocumentManager.DocumentCategory",
+				"name": "_category",
+				"type": "uint8"
+			},
+			{
+				"internalType": "address",
+				"name": "_holder",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "_documentHash",
+				"type": "bytes32"
+			}
+		],
+		"name": "issueDocument",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "issuer",
+				"type": "address"
+			}
+		],
+		"name": "IssuerAuthorized",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_documentID",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "_newHolder",
+				"type": "address"
+			}
+		],
+		"name": "transferDocument",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "enum TradeDocumentManager.DocumentCategory",
+				"name": "category",
+				"type": "uint8"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "verifier",
+				"type": "address"
+			}
+		],
+		"name": "VerifierAuthorized",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_documentID",
+				"type": "string"
+			}
+		],
+		"name": "verifyDocument",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_documentID",
+				"type": "string"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "_submittedHash",
+				"type": "bytes32"
+			}
+		],
+		"name": "verifyDocumentHash",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "enum TradeDocumentManager.DocumentCategory",
+				"name": "",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "authorizedVerifiers",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "enum TradeDocumentManager.DocumentCategory",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"name": "categoryTypes",
+		"outputs": [
+			{
+				"internalType": "enum TradeDocumentManager.DocumentType",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "documents",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "documentID",
+				"type": "string"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "documentHash",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "string",
+				"name": "documentName",
+				"type": "string"
+			},
+			{
+				"internalType": "enum TradeDocumentManager.DocumentType",
+				"name": "docType",
+				"type": "uint8"
+			},
+			{
+				"internalType": "enum TradeDocumentManager.DocumentCategory",
+				"name": "category",
+				"type": "uint8"
+			},
+			{
+				"internalType": "address",
+				"name": "issuer",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "holder",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "isVerified",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "issueDate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isActive",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_documentID",
+				"type": "string"
+			}
+		],
+		"name": "getDocument",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "documentName",
+				"type": "string"
+			},
+			{
+				"internalType": "enum TradeDocumentManager.DocumentType",
+				"name": "docType",
+				"type": "uint8"
+			},
+			{
+				"internalType": "enum TradeDocumentManager.DocumentCategory",
+				"name": "category",
+				"type": "uint8"
+			},
+			{
+				"internalType": "address",
+				"name": "issuer",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "holder",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "isVerified",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "issueDate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isActive",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "isAuthorizedIssuer",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "enum TradeDocumentManager.DocumentCategory",
+				"name": "_category",
+				"type": "uint8"
+			}
+		],
+		"name": "isDocumentTransferable",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "enum TradeDocumentManager.DocumentCategory",
+				"name": "_category",
+				"type": "uint8"
+			}
+		],
+		"name": "isDocumentVerifiable",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
