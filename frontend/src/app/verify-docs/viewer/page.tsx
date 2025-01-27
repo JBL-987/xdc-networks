@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import {
   Breadcrumb,
   BreadcrumbItem,

@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@remix-project/remix-tests": "^0.2.62",
+    "ethers": "^6.13.4"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.12",
+    "@openzeppelin/contracts": "^5.2.0",
+    "hardhat": "^2.22.18"
+  }
+}

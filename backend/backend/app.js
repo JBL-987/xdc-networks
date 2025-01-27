@@ -15,12 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // Your routes
 app.use("/verificator", require("./routes/verificator"));
-app.use("/create", require("./routes/create"));
-app.use("/issue", require("./routes/issue"));
-app.use("/verify", require("./routes/verify"));
-app.use("/add-verifier", require("./routes/addVerifier"));
-
-
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

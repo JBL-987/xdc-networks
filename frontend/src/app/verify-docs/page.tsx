@@ -5,7 +5,6 @@ import { Upload } from "lucide-react";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
@@ -88,7 +87,7 @@ const CreateDocsPage = () => {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <section className="justify-between mx-auto flex items-center gap-2 py-4">
+          <section className="justify-between mx-auto flex flex-col md:flex-row items-center gap-2 py-4">
             <Card className="w-3/4">
               <CardHeader>
                 <CardTitle>Verify Documents</CardTitle>
