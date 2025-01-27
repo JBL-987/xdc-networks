@@ -17,7 +17,7 @@ import { columns } from "@/components/demo/dashboard/columns";
 import DataTable from "@/components/demo/dashboard/data-table";
 import { useSidebar } from "@/hooks/use-sidebar";
 import { useStore } from "@/hooks/use-store";
-import { CheckCircle2, XCircle, Clock, LucideIcon } from "lucide-react";
+import { CheckCircle2, XCircle, Clock } from "lucide-react";
 
 // Define the interface for document details
 interface DocumentDetails {

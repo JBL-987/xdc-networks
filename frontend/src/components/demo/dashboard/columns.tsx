@@ -34,20 +34,19 @@ export const columns: ColumnDef<User>[] = [
       return <CopyText text={row.getValue("document_hash")} />;
     }
   },
-  // {
-  //   accessorKey: "role",
-  //   header: ({ column }) => <DataTableColumnHeader column={column} title={"Role"} />,
-  //   cell: ({ row }) => {
-  //     const role = usersRole.find((role) => role.value === row.getValue("role"));
+  {
+    accessorKey: "role",
+     header: ({ column }) => <DataTableColumnHeader column={column} title={"Role"} />,
+     cell: ({ row }) => {
+     const role = usersRole.find((role) => role.value === row.getValue("role"));
 
-  //     if (!role) {
-  //       // If a value is not what you expect or does not exist you can return null.
-  //       return null;
-  //     }
+    if (!role) {
+        return null;
+     }
 
-  //     return <span>{role.label}</span>;
-  //   },
-  // },
+     return <span>{role.label}</span>;
+     },
+    },
   {
     accessorKey: "status",
     header: ({ column }) => (

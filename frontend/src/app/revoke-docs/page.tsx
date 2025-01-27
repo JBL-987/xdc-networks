@@ -9,7 +9,6 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -74,7 +73,7 @@ const CreateDocsPage = () => {
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <Card className="w-full">
             <CardHeader>
-              <CardTitle className="text-center">Create and Revoke Document</CardTitle>
+              <CardTitle className="text-center">Revoke Document</CardTitle>
             </CardHeader>
             <CardContent>
               <div
@@ -90,7 +89,7 @@ const CreateDocsPage = () => {
               >
                 <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
                 <p className="text-sm text-gray-600 mb-4">
-                  Drag and drop your files here, or{" "}
+                  Drag and drop your files here to revoke it or{" "}
                   <span className="text-blue-500 hover:underline">
                     click to browse
                   </span>
@@ -102,26 +101,6 @@ const CreateDocsPage = () => {
                   accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png"
                   onChange={handleFileChange}
                 />
-                <p className="text-xs text-gray-500 mt-4">
-                  Don't have a config file press "Load Demo Config"?
-                </p>
-              </div>
-              
-              <div className="flex flex-wrap justify-center gap-4 mt-4">
-                <Link 
-                  href="https://docs.tradetrust.io/docs/reference/document-creator/config-file/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button variant="outline" size="sm">
-                    <span className="text-xs">Learn How to Create One</span>
-                  </Button>
-                </Link>
-                <Link href="/load-config">
-                  <Button variant="secondary" size="sm">
-                    <span className="text-xs">Load Demo Config</span>
-                  </Button>
-                </Link>
               </div>
             </CardContent>
           </Card>

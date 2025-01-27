@@ -17,11 +17,11 @@ const NavbarComponents = () => {
     <header className="z-[50] sticky top-0 w-full bg-background/95 border-b backdrop-blur-sm dark:bg-black/[0.6] border-border/40">
     <div className="container h-14 flex items-center">
       <Link
-        href="/"
-        className="flex justify-start items-center hover:opacity-85 transition-opacity duration-300"
+        href="/dashboard"
+        className="flex justify-start items-center hover:opacity-85 transition-opacity duration-300 text-lg sm:text-base xs:text-sm"
       >
-        <PanelsTopLeft className="w-6 h-6 mr-3" />
-        <span className="font-bold">XDC Ferify Network</span>
+        <PanelsTopLeft className="flex w-6 h-6 mr-3 xs:mr-2" />
+        <span className="font-bold w-16 md:w-32 lg:w-48">XDC Verify</span>
         <span className="sr-only">Back to main page</span>
       </Link>
       <nav className="ml-auto flex items-center gap-2">
