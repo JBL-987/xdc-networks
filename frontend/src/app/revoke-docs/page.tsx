@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -18,9 +19,11 @@ import {
   BreadcrumbSeparator
 } from "@/components/ui/breadcrumb";
 import NavbarComponents from "@/components/layouts/NavbarComponents";
+import Swal from "sweetalert2";
 
-const CreateDocsPage = () => {
+const RevokeDocsPage = () => {
   const [dragActive, setDragActive] = useState(false);
+  const [fileName, setFileName] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -37,7 +40,7 @@ const CreateDocsPage = () => {
     setDragActive(false);
     const files = e.dataTransfer.files;
     if (files.length > 0) {
-      console.log("Files dropped:", files);
+      handleFileSelection(files);
     }
   };
 
@@ -48,7 +51,52 @@ const CreateDocsPage = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
-      console.log("Files selected:", files);
+      handleFileSelection(files);
+    }
+  };
+
+  const handleFileSelection = (files: FileList) => {
+    const selectedFile = files[0];
+    if (selectedFile) {
+      setFileName(selectedFile.name);
+      Swal.fire({
+        title: "File Selected",
+        text: `You have selected ${selectedFile.name}`,
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+    }
+  };
+
+  const handleRevokeClick = () => {
+    if (fileName) {
+      // Simulate the revoke action
+      Swal.fire({
+        title: "Are you sure?",
+        text: `Do you want to revoke the document: ${fileName}?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, revoke it!",
+        cancelButtonText: "No, cancel",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Simulate successful revoke
+          Swal.fire({
+            title: "Revoked!",
+            text: `${fileName} has been successfully revoked.`,
+            icon: "success",
+            confirmButtonText: "OK",
+          });
+          setFileName(null); // Reset after revocation
+        }
+      });
+    } else {
+      Swal.fire({
+        title: "No file selected",
+        text: "Please select a file to revoke.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
     }
   };
 
@@ -65,7 +113,7 @@ const CreateDocsPage = () => {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage>Create Document</BreadcrumbPage>
+              <BreadcrumbPage>Revoke Document</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
@@ -90,21 +138,31 @@ const CreateDocsPage = () => {
                 <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
                 <p className="text-sm text-gray-600 mb-4">
                   Drag and drop your files here to revoke it or{" "}
-                  <span className="text-blue-500 hover:underline">
+                  <span className="text-white-500 hover:underline">
                     click to browse
                   </span>
                 </p>
+                {fileName && (
+                  <p className="text-sm text-gray-600 mb-4">Selected file: {fileName}</p>
+                )}
                 <input
                   ref={fileInputRef}
                   type="file"
                   className="hidden"
-                  accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png"
+                  accept=".tt"
                   onChange={handleFileChange}
                 />
               </div>
+              <div className="text-center mt-6">
+                <Button
+                  onClick={handleRevokeClick}
+                >
+                  Revoke Document
+                </Button>
+              </div>
             </CardContent>
           </Card>
-          
+
           <div className="hidden md:flex justify-center">
             <Image
               src="/upload.svg"
@@ -128,4 +186,4 @@ const CreateDocsPage = () => {
   );
 };
 
-export default CreateDocsPage;
+export default RevokeDocsPage;

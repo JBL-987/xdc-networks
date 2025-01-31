@@ -36,11 +36,13 @@
     "immer": "^10.1.1",
     "lucide-react": "^0.377.0",
     "magic-sdk": "^28.21.0",
+    "merkletreejs": "^0.4.1",
     "next": "^15.1.6",
     "next-themes": "^0.4.3",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "rimraf": "^6.0.1",
+    "sweetalert2": "^11.15.10",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "web3": "^4.16.0",
@@ -48,6 +50,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
